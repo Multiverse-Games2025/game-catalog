@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista de Juegos</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(0,0,0,0.4);
+      font-size: 1.8em;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+
+    .game-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.05);
+      margin: 10px 0;
+      padding: 12px 15px;
+      border-radius: 10px;
+      transition: background 0.3s;
+    }
+
+    .game-item:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .game-name {
+      font-size: 1.1em;
+    }
+
+    .send-btn {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .send-btn:hover {
+      background-color: #1da851;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      color: #aaa;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>Catálogo de Juegos</header>
+
+  <div class="container">
+    <label class="game-item">
+      <span class="game-name">Resident Evil 4</span>
+      <input type="checkbox" value="Resident Evil 4">
+    </label>
+
+    <label class="game-item">
+      <span class="game-name">Devil May Cry 3</span>
+      <input type="checkbox" value="Devil May Cry 3">
+    </label>
+
+    <label class="game-item">
+      <span class="game-name">PES 2025</span>
+      <input type="checkbox" value="PES 2025">
+    </label>
+
+    <label class="game-item">
+      <span class="game-name">Metal Slug XX</span>
+      <input type="checkbox" value="Metal Slug XX">
+    </label>
+
+    <label class="game-item">
+      <span class="game-name">Streets of Rage</span>
+      <input type="checkbox" value="Streets of Rage">
+    </label>
+
+    <button class="send-btn" onclick="sendWhatsApp()">Enviar por WhatsApp</button>
+  </div>
+
+  <footer>© 2025 Tu catálogo de juegos</footer>
+
+  <script>
+    function sendWhatsApp() {
+      const checked = document.querySelectorAll('input[type="checkbox"]:checked');
+      if (checked.length === 0) {
+        alert('Seleccioná al menos un juego.');
+        return;
+      }
+
+      const games = Array.from(checked).map(c => `- ${c.value}`).join('%0A');
+      const message = `Hola! Quiero estos juegos:%0A${games}`;
+      
+      // 🔧 Reemplazá el número por el tuyo (con código de país, sin + ni 0)
+      const phoneNumber = "549XXXXXXXXX"; // Ejemplo: 5491123456789
+
+      const url = `https://wa.me/${phoneNumber}?text=${message}`;
+      window.open(url, '_blank');
+    }
+  </script>
+</body>
+</html>
