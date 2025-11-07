@@ -1,0 +1,34 @@
+﻿<h1>Lista de juegos - PlayStation 2</h1>
+<p>Selecciona los juegos que te interesen y luego envíalos por WhatsApp.</p>
+
+<form id="gameForm">
+  <div>
+    <label><input type="checkbox" name="game" value="Resident Evil 4"> Resident Evil 4</label><br>
+    <label><input type="checkbox" name="game" value="Devil May Cry 3"> Devil May Cry 3</label><br>
+    <label><input type="checkbox" name="game" value="PES 2025"> PES 2025</label><br>
+    <label><input type="checkbox" name="game" value="Metal Slug XX"> Metal Slug XX</label><br>
+    <label><input type="checkbox" name="game" value="Streets of Rage"> Streets of Rage</label><br>
+  </div>
+
+  <button type="button" onclick="sendWhatsApp()">Enviar por WhatsApp</button>
+</form>
+
+<a href="index.html">← Volver al inicio</a>
+
+<script>
+function sendWhatsApp() {
+  const selected = Array.from(document.querySelectorAll('input[name="game"]:checked'))
+    .map(el => el.value);
+
+  if (selected.length === 0) {
+    alert('Selecciona al menos un juego.');
+    return;
+  }
+
+  const message = `Hola, me gustaría solicitar los siguientes juegos de PS2:%0A- ${selected.join('%0A- ')}`;
+  const phoneNumber = "+543813643257"; // 👈 coloca aquí tu número con código de país (ej: Argentina 54911...)
+  const url = `https://wa.me/${phoneNumber}?text=${message}`;
+
+  window.open(url, '_blank');
+}
+</script>
